@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OER Project Orientation - MEC Department</title>
+    <style>
+        :root {
+            --primary-color: #2E3192;
+            --secondary-color: #00AEEF;
+            --accent-color: #ED1C24;
+            --highlight-color: #FFD100;
+            --light-bg: #F4F7FE;
+            --dark-text: #333333;
+            --light-text: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f5 100%);
+            color: var(--dark-text);
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--light-text);
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        .tabs-container {
+            background-color: var(--light-bg);
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tabs {
+            display: flex;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2E3192 100%);
+            overflow-x: auto;
+            padding: 0 10px;
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--light-text);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .tab:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .tab.active {
+            background-color: var(--light-text);
+            color: var(--primary-color);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--highlight-color);
+        }
+        
+        .content-section {
+            display: none;
+            padding: 30px;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            min-height: 500px;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--highlight-color);
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: 20px 0 10px;
+            font-size: 1.4rem;
+        }
+        
+        .info-card {
+            background-color: var(--light-bg);
+            border-left: 5px solid var(--secondary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .info-card.highlight {
+            border-left-color: var(--accent-color);
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF0C2 100%);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3A3DA8 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #F9FAFF;
+        }
+        
+        tr:hover {
+            background-color: #EDF2FF;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        li:before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .team-section {
+            background: linear-gradient(135deg, #E8F4FF 0%, #F0F7FF 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .team-section h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .timeline-date {
+            flex: 0 0 150px;
+            font-weight: bold;
+            color: var(--primary-color);
+            padding-right: 20px;
+            text-align: right;
+        }
+        
+        .timeline-marker {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            position: absolute;
+            left: 14px;
+            top: 5px;
+            z-index: 1;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--accent-color);
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding-left: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .requirement-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .requirement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .requirement-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .color-key {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .color-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .color-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #E0E0E0;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: left;
+                border-radius: 0;
+            }
+            
+            .tab.active::after {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-date {
+                flex: 0 0 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OER Project Orientation</h1>
+            <p class="subtitle">MEC Department • LaGuardia Community College • AY 2025-2026</p>
+        </header>
+        
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" data-target="overview">Overview</button>
+                <button class="tab" data-target="objectives">Objectives</button>
+                <button class="tab" data-target="requirements">Requirements</button>
+                <button class="tab" data-target="timeline">Timeline</button>
+                <button class="tab" data-target="reporting">Reporting</button>
+                <button class="tab" data-target="course-conversion">Course Conversion</button>
+                <button class="tab" data-target="content-creation">Content Creation</button>
+                <button class="tab" data-target="courses">Course Teams</button>
+            </div>
+            
+            <section id="overview" class="content-section active">
+                <h2>Project Overview</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">$23,000</div>
+                        <div class="stat-label">Award Amount</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Courses Involved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Course Sections</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4,000+</div>
+                        <div class="stat-label">Students Impacted</div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Project Goals</h3>
+                    <table>
+                        <tr>
+                            <td>Reduce textbook costs</td>
+                            <td>Provide free, high-quality digital resources</td>
+                        </tr>
+                        <tr>
+                            <td>Integrate modern technology</td>
+                            <td>AI tools, advanced calculators, R software</td>
+                        </tr>
+                        <tr>
+                            <td>Develop educational materials</td>
+                            <td>Guided lecture notes, interactive question banks</td>
+                        </tr>
+                        <tr>
+                            <td>Foster inclusive learning</td>
+                            <td>Accessible materials encouraging real-world connections</td>
+                        </tr>
+                        <tr>
+                            <td>Sustain faculty development</td>
+                            <td>Training, peer review, continuous improvement</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-card highlight">
+                    <h3>Courses Included in Project</h3>
+                    <table>
+                        <tr>
+                            <th>Course</th>
+                            <th>Sections</th>
+                            <th>Enrollment Estimate</th>
+                        </tr>
+                        <tr>
+                            <td>MAT104</td>
+                            <td>5</td>
+                            <td>125 students</td>
+                        </tr>
+                        <tr>
+                            <td>MAT120</td>
+                            <td>99</td>
+                            <td>2,475 students</td>
+                        </tr>
+                        <tr>
+                            <td>MAT201 (Calculus I)</td>
+                            <td>42</td>
+                            <td>1,050 students</td>
+                        </tr>
+                        <tr>
+                            <td>MAT202 (Calculus II)</td>
+                            <td>22</td>
+                            <td>550 students</td>
+                        </tr>
+                        <tr>
+                            <td>MAT203 (Calculus III)</td>
+                            <td>10</td>
+                            <td>250 students</td>
+                        </tr>
+                        <tr>
+                            <td>MAT231</td>
+                            <td>22</td>
+                            <td>550 students</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <section id="objectives" class="content-section">
+                <h2>Project Objectives by Course</h2>
+                
+                <div class="team-section">
+                    <h3>MAT104 Team • Dr. Dora & Dr. Angela Cornelius</h3>
+                    <table>
+                        <tr>
+                            <th>Objective</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Create OER Version</td>
+                            <td>Develop MAT104 on MyOpenMath platform for preservice teachers</td>
+                        </tr>
+                        <tr>
+                            <td>Develop Diagnostic Test</td>
+                            <td>Assess students' foundational math skills</td>
+                        </tr>
+                        <tr>
+                            <td>Create Pedagogical Assessments</td>
+                            <td>Quizzes, assignments, and tests rich in pedagogy</td>
+                        </tr>
+                        <tr>
+                            <td>Produce Support Materials</td>
+                            <td>Modular resources to address common learning gaps</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="team-section">
+                    <h3>MAT120 Team • Drs. Mangala Kothari & Prabha Betne</h3>
+                    <table>
+                        <tr>
+                            <th>Objective</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Integrate Technology</td>
+                            <td>R software, advanced calculators (TI-83/TI-84)</td>
+                        </tr>
+                        <tr>
+                            <td>Revise Course Materials</td>
+                            <td>Class notes, PowerPoints, worksheets, homework</td>
+                        </tr>
+                        <tr>
+                            <td>Create Tech-Friendly Assignments</td>
+                            <td>Real-world data applications with technology focus</td>
+                        </tr>
+                        <tr>
+                            <td>Assess Learning Outcomes</td>
+                            <td>Compare final exam scores between pilot and control sections</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="team-section">
+                    <h3>Calculus Sequence Team • Drs. Tao Chen & Bukurie Gjoci</h3>
+                    <table>
+                        <tr>
+                            <th>Objective</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Create Calculus III Template</td>
+                            <td>Master section on MyOpenMath with full resources</td>
+                        </tr>
+                        <tr>
+                            <td>Develop Calculus I Lecture Notes</td>
+                            <td>Custom materials for LaGuardia students</td>
+                        </tr>
+                        <tr>
+                            <td>Include Multimedia Resources</td>
+                            <td>Reading materials, lecture videos, homework, quizzes</td>
+                        </tr>
+                        <tr>
+                            <td>Enhance Reading Skills</td>
+                            <td>Improve students' ability to read mathematical materials</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="team-section">
+                    <h3>MAT231 Team • Drs. Marina Dedlovskaya & Shenglan Yuan</h3>
+                    <table>
+                        <tr>
+                            <th>Objective</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Develop Comprehensive Workbook</td>
+                            <td>12 reading assignments, worksheets, worked examples</td>
+                        </tr>
+                        <tr>
+                            <td>Create Study Guides</td>
+                            <td>Guided problem sets and interactive activities</td>
+                        </tr>
+                        <tr>
+                            <td>Expand Question Bank</td>
+                            <td>Focus on difficult topics (logic, combinatorics, etc.)</td>
+                        </tr>
+                        <tr>
+                            <td>Pilot Materials</td>
+                            <td>Implement in at least two sections of MAT231 and MAT210</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <section id="requirements" class="content-section">
+                <h2>Project Requirements</h2>
+                
+                <div class="info-card">
+                    <h3>CUNY OER Requirements</h3>
+                    <div class="requirements-grid">
+                        <div class="requirement-card">
+                            <h4>Course Designation</h4>
+                            <ul>
+                                <li>Mark as "Zero Textbook Cost" in CUNYfirst</li>
+                                <li>Update course attribute for all OER sections</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="requirement-card">
+                            <h4>Licensing</h4>
+                            <ul>
+                                <li>Use Creative Commons licenses</li>
+                                <li>Allow reuse, remixing, redistribution</li>
+                                <li>Ensure all components are openly licensed</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="requirement-card">
+                            <h4>Accessibility</h4>
+                            <ul>
+                                <li>Meet CUNY accessibility standards</li>
+                                <li>Ensure materials usable by all students</li>
+                                <li>Follow web accessibility guidelines</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="requirement-card">
+                            <h4>Reporting</h4>
+                            <ul>
+                                <li>Submit mid-year report (mid-January)</li>
+                                <li>Submit year-end report (May 1)</li>
+                                <li>Include assessment data if collected</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="requirement-card">
+                            <h4>Attribution</h4>
+                            <ul>
+                                <li>Label as "Funded by CUNY OER Initiative"</li>
+                                <li>Include proper attribution on all materials</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="requirement-card">
+                            <h4>Publication</h4>
+                            <ul>
+                                <li>Publish within 18 months of funding</li>
+                                <li>Upload to CUNY platforms</li>
+                                <li>Make publicly available</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card highlight">
+                    <h3>Technology Integration</h3>
+                    <table>
+                        <tr>
+                            <th>Platform/Tool</th>
+                            <th>Purpose</th>
+                            <th>Courses</th>
+                        </tr>
+                        <tr>
+                            <td>MyOpenMath</td>
+                            <td>Primary OER platform for materials and assessments</td>
+                            <td>All Courses</td>
+                        </tr>
+                        <tr>
+                            <td>R Software</td>
+                            <td>Statistical analysis and data visualization</td>
+                            <td>MAT120</td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Calculators</td>
+                            <td>Mathematical computations (TI-83/TI-84)</td>
+                            <td>MAT120, Calculus</td>
+                        </tr>
+                        <tr>
+                            <td>AI Tools</td>
+                            <td>Enhanced learning experiences (exploratory)</td>
+                            <td>All Courses</td>
+                        </tr>
+                        <tr>
+                            <td>Brightspace</td>
+                            <td>Institutional platform for course delivery</td>
+                            <td>All Courses</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <section id="timeline" class="content-section">
+                <h2>Project Timeline</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Oct 15, 2025</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Award Notification</h3>
+                            <p>Departments learn of their OER award</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Nov 5, 2025</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>OER Orientation</h3>
+                            <p>Virtual workshop for project leads and faculty</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Nov 10, 2025</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Budget Outline Due</h3>
+                            <p>Return budget outline and Letter of Intent</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mid-Dec 2025</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Mid-year Proposals Due</h3>
+                            <p>Small number of proposals considered for additional funding</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Jan 2026</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Mid-Year Review & Report</h3>
+                            <p>Meet with library staff and submit progress report</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Feb 2026</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Grant Prep Workshop</h3>
+                            <p>Prepare for next year's Request for Proposals</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mar 2026</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>FY27 RFP Released</h3>
+                            <p>New Request for Proposals for following academic year</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 1, 2026</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>End of OER Grant Year</h3>
+                            <p>All proposed courses must be developed by this date</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mid-May 2026</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>End of Year Reporting Due</h3>
+                            <p>Final reporting for grant completion</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Spring 2026</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>OER Symposium</h3>
+                            <p>Showcase projects and share best practices</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="reporting" class="content-section">
+                <h2>Reporting Requirements</h2>
+                
+                <div class="info-card">
+                    <h3>Mid-Year Report (Due Mid-January 2026)</h3>
+                    <table>
+                        <tr>
+                            <th>Component</th>
+                            <th>Required Content</th>
+                        </tr>
+                        <tr>
+                            <td>Progress Update</td>
+                            <td>Detailed description of progress on project objectives</td>
+                        </tr>
+                        <tr>
+                            <td>Challenges</td>
+                            <td>Obstacles encountered and resolution strategies</td>
+                        </tr>
+                        <tr>
+                            <td>Budget Update</td>
+                            <td>Summary of expenditures to date</td>
+                        </tr>
+                        <tr>
+                            <td>Next Steps</td>
+                            <td>Plan for completing remaining project activities</td>
+                        </tr>
+                        <tr>
+                            <td>Preliminary Data</td>
+                            <td>Initial assessment results if available</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-card">
+                    <h3>End-of-Year Report (Due May 1, 2026)</h3>
+                    <table>
+                        <tr>
+                            <th>Component</th>
+                            <th>Required Content</th>
+                        </tr>
+                        <tr>
+                            <td>Project Summary</td>
+                            <td>Comprehensive overview of completed work</td>
+                        </tr>
+                        <tr>
+                            <td>Outcomes</td>
+                            <td>Description of project outcomes and impact</td>
+                        </tr>
+                        <tr>
+                            <td>Assessment Data</td>
+                            <td>Student outcomes, surveys, focus group results</td>
+                        </tr>
+                        <tr>
+                            <td>Budget Summary</td>
+                            <td>Final accounting of all expenditures</td>
+                        </tr>
+                        <tr>
+                            <td>Future Plans</td>
+                            <td>Plans for sustaining and expanding the project</td>
+                        </tr>
+                        <tr>
+                            <td>Lessons Learned</td>
+                            <td>Reflections on project successes and challenges</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-card highlight">
+                    <h3>Additional Assessment Requirements</h3>
+                    <table>
+                        <tr>
+                            <th>Assessment Type</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Student Outcomes</td>
+                            <td>Compare final exam averages between pilot and control sections</td>
+                        </tr>
+                        <tr>
+                            <td>Surveys</td>
+                            <td>Collect student feedback on OER materials and resources</td>
+                        </tr>
+                        <tr>
+                            <td>Faculty Feedback</td>
+                            <td>Gather qualitative input from participating instructors</td>
+                        </tr>
+                        <tr>
+                            <td>Usage Analytics</td>
+                            <td>Track engagement with digital platforms and resources</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <section id="course-conversion" class="content-section">
+                <h2>Course Conversion LOI</h2>
+                
+                <div class="info-card">
+                    <h3>When to Use Course Conversion LOI</h3>
+                    <table>
+                        <tr>
+                            <td>Converting existing courses</td>
+                            <td>To Zero Textbook Cost (ZTC) format</td>
+                        </tr>
+                        <tr>
+                            <td>Using OER materials</td>
+                            <td>Open Educational Resources</td>
+                        </tr>
+                        <tr>
+                            <td>Library licensed materials</td>
+                            <td>Resources freely available to CUNY students</td>
+                        </tr>
+                        <tr>
+                            <td>Freely available internet resources</td>
+                            <td>Materials available at no cost online</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Faculty Commitments for Course Conversion</h3>
+                    <table>
+                        <tr>
+                            <th>Requirement</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Progress Meetings</td>
+                            <td>Attend three meetings: beginning, mid-year, and end-year</td>
+                        </tr>
+                        <tr>
+                            <td>Written Updates</td>
+                            <td>Provide updates for mid-year and end-year reports</td>
+                        </tr>
+                        <tr>
+                            <td>Pre-conversion Syllabus</td>
+                            <td>Submit to campus OER representative (not shared publicly)</td>
+                        </tr>
+                        <tr>
+                            <td>Teach Converted Course</td>
+                            <td>In next semester assigned after grant year ends</td>
+                        </tr>
+                        <tr>
+                            <td>Syllabus Labeling</td>
+                            <td>Mark as ZTC, OER, or Zero Textbook Course</td>
+                        </tr>
+                        <tr>
+                            <td>CUNYFirst Designation</td>
+                            <td>Communicate course should be marked ZTC in CUNYFirst</td>
+                        </tr>
+                        <tr>
+                            <td>Post-conversion Syllabus</td>
+                            <td>Provide to campus OER representative for records</td>
+                        </tr>
+                        <tr>
+                            <td>Public Sharing</td>
+                            <td>Share at least one deliverable publicly</td>
+                        </tr>
+                        <tr>
+                            <td>Open Licensing</td>
+                            <td>Use Creative Commons licenses for original materials</td>
+                        </tr>
+                        <tr>
+                            <td>Material Upload</td>
+                            <td>Upload to Academic Works or opened.cuny.edu</td>
+                        </tr>
+                        <tr>
+                            <td>Accessibility</td>
+                            <td>Ensure all materials meet CUNY accessibility standards</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <section id="content-creation" class="content-section">
+                <h2>Content Creation LOI</h2>
+                
+                <div class="info-card">
+                    <h3>When to Use Content Creation LOI</h3>
+                    <table>
+                        <tr>
+                            <td>Creating new educational materials</td>
+                            <td>From scratch rather than adapting existing content</td>
+                        </tr>
+                        <tr>
+                            <td>Openly licensed materials</td>
+                            <td>For reuse, remixing, and redistribution</td>
+                        </tr>
+                        <tr>
+                            <td>New OER development</td>
+                            <td>Rather than course conversion</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Faculty Commitments for Content Creation</h3>
+                    <table>
+                        <tr>
+                            <th>Requirement</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Progress Meetings</td>
+                            <td>Attend three meetings: beginning, mid-year, and end-year</td>
+                        </tr>
+                        <tr>
+                            <td>Written Updates</td>
+                            <td>Provide updates for mid-year and end-year reports</td>
+                        </tr>
+                        <tr>
+                            <td>Creative Commons License</td>
+                            <td>Apply license allowing reuse and remixing</td>
+                        </tr>
+                        <tr>
+                            <td>Open Component Parts</td>
+                            <td>Ensure all components are openly licensed or fair use</td>
+                        </tr>
+                        <tr>
+                            <td>Public Availability</td>
+                            <td>Make available via CUNY platforms</td>
+                        </tr>
+                        <tr>
+                            <td>Funding Attribution</td>
+                            <td>Label as "Funded by CUNY OER Initiative"</td>
+                        </tr>
+                        <tr>
+                            <td>Accessibility</td>
+                            <td>Meet CUNY accessibility standards</td>
+                        </tr>
+                        <tr>
+                            <td>Publication Timeline</td>
+                            <td>Publish within 18 months of funding</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-card highlight">
+                    <h3>CUNY Platform Options</h3>
+                    <table>
+                        <tr>
+                            <th>Platform</th>
+                            <th>URL</th>
+                            <th>Best For</th>
+                        </tr>
+                        <tr>
+                            <td>Pressbooks</td>
+                            <td>pressbooks.cuny.edu</td>
+                            <td>Textbooks and book-like content</td>
+                        </tr>
+                        <tr>
+                            <td>Manifold</td>
+                            <td>cuny.manifoldapp.org</td>
+                            <td>Interactive publications</td>
+                        </tr>
+                        <tr>
+                            <td>CUNY Academic Works</td>
+                            <td>academicworks.cuny.edu</td>
+                            <td>Static documents and files</td>
+                        </tr>
+                        <tr>
+                            <td>CUNY Academic Commons</td>
+                            <td>commons.gc.cuny.edu</td>
+                            <td>Collaborative projects</td>
+                        </tr>
+                        <tr>
+                            <td>City Tech OpenLab</td>
+                            <td>openlab.citytech.cuny.edu</td>
+                            <td>Course materials and projects</td>
+                        </tr>
+                        <tr>
+                            <td>BMCC OpenLab</td>
+                            <td>openlab.bmcc.cuny.edu</td>
+                            <td>Course materials and projects</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <section id="courses" class="content-section">
+                <h2>Course Teams & Implementation</h2>
+                
+                <div class="info-card">
+                    <h3>Course Implementation Plans</h3>
+                    <table>
+                        <tr>
+                            <th>Course</th>
+                            <th>Faculty Team</th>
+                            <th>Key Objectives</th>
+                            <th>Timeline</th>
+                        </tr>
+                        <tr>
+                            <td>MAT104</td>
+                            <td>Dr. Dora & Dr. Angela Cornelius</td>
+                            <td>OER textbook, diagnostic test, pedagogical assignments</td>
+                            <td>Stage 1: Spring 2026<br>Stage 2: Spring 2027</td>
+                        </tr>
+                        <tr>
+                            <td>MAT120</td>
+                            <td>Drs. Mangala Kothari & Prabha Betne</td>
+                            <td>Technology integration, revised materials</td>
+                            <td>Fall 2025: Revise<br>Spring 2026: Pilot</td>
+                        </tr>
+                        <tr>
+                            <td>Calculus I & II</td>
+                            <td>Drs. Tao Chen & Bukurie Gjoci</td>
+                            <td>Study guides, platform maintenance</td>
+                            <td>Continuous improvement</td>
+                        </tr>
+                        <tr>
+                            <td>Calculus III</td>
+                            <td>Drs. Tao Chen & Bukurie Gjoci</td>
+                            <td>Master template with full resources</td>
+                            <td>Dec 2025: Draft<br>June 2026: Complete</td>
+                        </tr>
+                        <tr>
+                            <td>MAT231</td>
+                            <td>Drs. Marina Dedlovskaya, Shenglan Yuan</td>
+                            <td>Workbook, study guides, question bank</td>
+                            <td>June 2025: Start<br>Jan-May 2026: Develop</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Implementation Timeline</h3>
+                    <table>
+                        <tr>
+                            <th>Timeframe</th>
+                            <th>Activities</th>
+                        </tr>
+                        <tr>
+                            <td>Fall 2025</td>
+                            <td>Faculty teams revise materials based on prior feedback</td>
+                        </tr>
+                        <tr>
+                            <td>Spring 2026</td>
+                            <td>New materials piloted in select sections</td>
+                        </tr>
+                        <tr>
+                            <td>Summer 2026</td>
+                            <td>Faculty review and revisions based on pilot results</td>
+                        </tr>
+                        <tr>
+                            <td>Ongoing</td>
+                            <td>Meetings, workshops, collaborative development sessions</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="color-key">
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: var(--primary-color);"></div>
+                        <span>Primary Information</span>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: var(--secondary-color);"></div>
+                        <span>Secondary Information</span>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: var(--accent-color);"></div>
+                        <span>Important Highlights</span>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: var(--highlight-color);"></div>
+                        <span>Key Elements</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>MEC Department OER Project • LaGuardia Community College • Academic Year 2025-2026</p>
+            <p>Contact: Dean Eric Hofmann (ehofmann@lagcc.cuny.edu) • Niki Jones (njones@lagcc.cuny.edu)</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Remove active class from all tabs and content sections
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contentSections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content section
+                    this.classList.add('active');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
