@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming & Software Development - Year 1 PPR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #3f51b5 50%, #2196f3 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 3px solid #ffd54f;
+        }
+
+        .college-name {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #ffd54f;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .department-name {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #e3f2fd;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .presenters {
+            font-size: 1.6rem;
+            color: #bbdefb;
+            font-weight: 500;
+        }
+
+        .slide-container {
+            flex: 1;
+            position: relative;
+            padding: 2rem 2rem 8rem 2rem;
+        }
+
+        .slide {
+            display: none;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ffd54f, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #e1f5fe;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ffd54f;
+            text-align: center;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            margin-bottom: 2rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 213, 79, 0.5);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, #ffd54f, #ffeb3b);
+            color: #1a237e;
+            border-color: #ffd54f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 213, 79, 0.4);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 213, 79, 0.2);
+            border-color: #ffd54f;
+            transform: translateY(-1px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Interactive Tables */
+        .data-table-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 213, 79, 0.3);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .data-table th {
+            background: linear-gradient(45deg, #1976d2, #2196f3);
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .data-table td {
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 213, 79, 0.2);
+            transform: scale(1.02);
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .highlight-number {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffd54f;
+        }
+
+        .improvement-cell {
+            background: linear-gradient(45deg, #4caf50, #66bb6a) !important;
+            color: white;
+            font-weight: bold;
+        }
+
+        .warning-cell {
+            background: linear-gradient(45deg, #ff9800, #ffb74d) !important;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid rgba(255, 213, 79, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 213, 79, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd54f;
+            box-shadow: 0 15px 35px rgba(255, 213, 79, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #ffd54f;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-label {
+            font-size: 1.3rem;
+            color: #e1f5fe;
+            position: relative;
+            z-index: 1;
+        }
+
+        .objective-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 213, 79, 0.4);
+            text-align: center;
+        }
+
+        .objective-box p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .objective-box strong {
+            color: #ffd54f;
+        }
+
+        .calculation-box {
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid #4caf50;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .calculation-box h4 {
+            color: #66bb6a;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+            background: rgba(26, 35, 126, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 213, 79, 0.5);
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #1976d2, #2196f3);
+            border: 2px solid #ffd54f;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(45deg, #ffd54f, #ffeb3b);
+            color: #1a237e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 213, 79, 0.4);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 1rem;
+            right: 2rem;
+            background: rgba(26, 35, 126, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 213, 79, 0.5);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .conclusion-highlight {
+            background: linear-gradient(45deg, #4caf50, #66bb6a);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .college-name {
+                font-size: 2rem;
+            }
+            
+            .department-name {
+                font-size: 1.6rem;
+            }
+            
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slide h2 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="header">
+            <div class="college-name">LAGUARDIA COMMUNITY COLLEGE</div>
+            <div class="department-name">MATH, ENGINEERING, & COMPUTER SCIENCE</div>
+            <div class="presenters">Year 1 Program Review Plan</div><br>
+            <div class="presenters">Alaa Darabseh & Khalid Kassou</div>
+        </div>
+
+        <div class="slide-container">
+            <!-- Slide 1: Plan -->
+            <div class="slide active">
+                <h1>📋 Year 1 Program Review Plan</h1>
+                <h2>Programming and Software Development (A.A.S.)</h2>
+                
+                <div class="objective-box">
+                    <h3>Comprehensive Review Scope</h3>
+                    <p><strong>Purpose:</strong> Systematic evaluation of program effectiveness, student success, and strategic improvement opportunities</p>
+                    <p><strong>Focus Areas:</strong> Enrollment trends • Student retention & graduation • Transfer outcomes • Curriculum alignment • Support services</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">185</div>
+                        <div class="stat-label">Current Enrollment<br>Fall 2024</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">83.2%</div>
+                        <div class="stat-label">5-Year Growth<br>2019-2024</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">67.9%</div>
+                        <div class="stat-label">Transfer Rate<br>4-Year Institutions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">39</div>
+                        <div class="stat-label">Annual Graduates<br>2024-25</div>
+                    </div>
+                </div>
+
+                <div class="data-table-container">
+                    <h3>Enrollment Trends (2019-2024)</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Term</th>
+                                <th>Enrollment</th>
+                                <th>Change</th>
+                                <th>Growth Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Fall 2019</strong></td>
+                                <td>101</td>
+                                <td>—</td>
+                                <td>Baseline</td>
+                            </tr>
+                            <tr class="improvement-cell">
+                                <td><strong>Fall 2020</strong></td>
+                                <td>143</td>
+                                <td>+42</td>
+                                <td>+41.6%</td>
+                            </tr>
+                            <tr class="improvement-cell">
+                                <td><strong>Fall 2021</strong></td>
+                                <td>157</td>
+                                <td>+14</td>
+                                <td>+9.8%</td>
+                            </tr>
+                            <tr class="improvement-cell">
+                                <td><strong>Fall 2022</strong></td>
+                                <td>180</td>
+                                <td>+23</td>
+                                <td>+14.6%</td>
+                            </tr>
+                            <tr class="improvement-cell">
+                                <td><strong>Fall 2023</strong></td>
+                                <td>201</td>
+                                <td>+21</td>
+                                <td>+11.7%</td>
+                            </tr>
+                            <tr class="warning-cell">
+                                <td><strong>Fall 2024</strong></td>
+                                <td>185</td>
+                                <td>-16</td>
+                                <td>-8.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="data-table-container">
+                    <h3>Student Success Metrics</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Rate/Count</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Average Retention Rate</strong></td>
+                                <td class="highlight-number">52.7%</td>
+                                <td>Range: 33.3% - 62.5%</td>
+                            </tr>
+                            <tr class="improvement-cell">
+                                <td><strong>Average Success Rate</strong></td>
+                                <td class="highlight-number">70.6%</td>
+                                <td>Students continuing or graduated</td>
+                            </tr>
+                            <tr class="improvement-cell">
+                                <td><strong>Total Graduates (6 years)</strong></td>
+                                <td class="highlight-number">179</td>
+                                <td>85.7% increase (21→39 annually)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="conclusion-highlight">
+                    ⚠️ KEY INSIGHT: First enrollment decline in 5 years, but strong retention at 83.2% above 2019 baseline with excellent transfer outcomes
+                </div>
+            </div>
+
+            <!-- Slide 2: Program Priorities -->
+            <div class="slide">
+                <h2>🎯 Program Priorities</h2>
+                
+                <div class="data-table-container">
+                    <h3>Three Strategic Priorities</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Priority</th>
+                                <th>Challenge</th>
+                                <th>Target Outcome</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1️⃣ Enrollment</strong></td>
+                                <td>First decline in 5 years (-8.0%)</td>
+                                <td class="improvement-cell">Reverse decline & sustain growth</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2️⃣ Retention</strong></td>
+                                <td>Fluctuating 33.3% - 62.5%</td>
+                                <td class="improvement-cell">Consistent 70%+ retention</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3️⃣ Curriculum</strong></td>
+                                <td>Rapid tech industry evolution</td>
+                                <td class="improvement-cell">Align with emerging tech</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="showTab('priority1')">Priority 1</button>
+                        <button class="tab-btn" onclick="showTab('priority2')">Priority 2</button>
+                        <button class="tab-btn" onclick="showTab('priority3')">Priority 3</button>
+                    </div>
+
+                    <div id="priority1" class="tab-content active">
+                        <div class="objective-box">
+                            <h3>Priority 1: Reverse Enrollment Decline</h3>
+                            <p><strong>Justification:</strong> After 5 consecutive years of growth (83.2% increase), Fall 2024 showed first decline. Need to understand if this signals a trend or temporary fluctuation.</p>
+                        </div>
+
+                        <div class="data-table-container">
+                            <h3>Investigation Questions</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Area</th>
+                                        <th>Key Questions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>🚪 Student Departure</strong></td>
+                                        <td>Why did students not return? What barriers exist?</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🏆 Competition</strong></td>
+                                        <td>Are other CUNY programs attracting our students?</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>📅 Scheduling</strong></td>
+                                        <td>Do conflicts limit enrollment? Impact of hybrid options?</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>📉 Market Demand</strong></td>
+                                        <td>Has student interest in tech careers changed?</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="priority2" class="tab-content">
+                        <div class="objective-box">
+                            <h3>Priority 2: Improve Retention</h3>
+                            <p><strong>Challenge:</strong> Retention rates fluctuate 33.3% to 62.5% (avg 52.7%). Target: Consistent <strong>70%+ retention</strong> across all cohorts.</p>
+                        </div>
+
+                        <div class="data-table-container">
+                            <h3>Multi-Pronged Strategy</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Strategy</th>
+                                        <th>Action</th>
+                                        <th>Expected Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>🎯 Barrier ID</strong></td>
+                                        <td>Survey stopped-out students</td>
+                                        <td class="improvement-cell">Target support services</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>📊 Gateway Analysis</strong></td>
+                                        <td>Analyze DFW rates</td>
+                                        <td class="improvement-cell">Curriculum adjustments</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>⚡ Early Warning</strong></td>
+                                        <td>Enhance alert systems</td>
+                                        <td class="improvement-cell">Proactive intervention</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🤝 Peer Support</strong></td>
+                                        <td>Mentoring & tutoring</td>
+                                        <td class="improvement-cell">Student engagement</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="priority3" class="tab-content">
+                        <div class="objective-box">
+                            <h3>Priority 3: Curriculum & Industry Alignment</h3>
+                            <p><strong>Imperative:</strong> Technology evolves rapidly. Must balance foundational concepts with current industry practices while preparing for both careers AND transfer (67.9% rate).</p>
+                        </div>
+
+                        <div class="data-table-container">
+                            <h3>Investigation Activities</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Activity</th>
+                                        <th>Purpose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>🏢 Employer Surveys</strong></td>
+                                        <td>Identify skill gaps & emerging needs</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🔍 Peer Review</strong></td>
+                                        <td>Compare CUNY & regional programs</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>📈 Job Market Analysis</strong></td>
+                                        <td>Industry trends & in-demand skills</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🎓 Graduate Feedback</strong></td>
+                                        <td>Curriculum preparedness assessment</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="calculation-box">
+                            <h4>Emerging Technologies Under Consideration:</h4>
+                            <p>☁️ <strong>Cloud Computing</strong> | 🤖 <strong>AI/ML Basics</strong> | 🔧 <strong>DevOps Practices</strong> | 🔒 <strong>Cybersecurity Fundamentals</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Data Collection Methods -->
+            <div class="slide">
+                <h2>📊 Data Collection Methods</h2>
+                
+                <div class="data-table-container">
+                    <h3>Comprehensive Assessment Approach</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 35%;">Method Category</th>
+                                <th>Specific Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>📈 Quantitative Data</strong></td>
+                                <td>
+                                    • Enrollment trends by semester, demographics, course section<br>
+                                    • Retention & persistence rates across cohorts<br>
+                                    • Three-year graduation rates<br>
+                                    • Course-level DFW rates (gateway bottlenecks)<br>
+                                    • Transfer outcomes & destination analysis
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>📋 Surveys & Student Voice</strong></td>
+                                <td>
+                                    • Non-returning student survey (departure reasons)<br>
+                                    • Current student satisfaction survey<br>
+                                    • Graduate exit survey (program preparation)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>📚 Curriculum Review</strong></td>
+                                <td>
+                                    • PLO-to-course outcome mapping<br>
+                                    • Benchmarking vs. peer CUNY programs<br>
+                                    • Faculty curriculum review workshops<br>
+                                    • Industry advisory board feedback
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>💬 Qualitative Input</strong></td>
+                                <td>
+                                    • Faculty focus groups (student success barriers)<br>
+                                    • Student focus groups (scheduling, support, challenges)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="objective-box">
+                    <h3>Expected Outcomes</h3>
+                    <p>✓ Clear understanding of enrollment decline factors</p>
+                    <p>✓ Targeted interventions to improve retention rates</p>
+                    <p>✓ Curriculum updates aligned with industry needs</p>
+                    <p>✓ Enhanced support services based on student feedback</p>
+                    <p>✓ Continuous improvement cycle for program quality</p>
+                </div>
+            </div>
+
+            <!-- Slide 4: Timeline -->
+            <div class="slide">
+                <h2>📅 Implementation Timeline</h2>
+                
+                <div class="data-table-container">
+                    <h3>Five-Phase Approach (2026-2027)</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Phase</th>
+                                <th style="width: 20%;">Timeframe</th>
+                                <th>Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="improvement-cell">
+                                <td><strong>Phase 1:<br>Data Collection &<br>Survey Design</strong></td>
+                                <td><strong>Spring I 2026<br>(Mar–Jun)</strong></td>
+                                <td>
+                                    • Pull institutional data on enrollment, retention, graduation, and DFW rates<br>
+                                    • Design and finalize survey instruments<br>
+                                    • Distribute non-returning student survey<br>
+                                    • Begin PLO-to-course mapping
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phase 2:<br>Light Data<br>Collection</strong></td>
+                                <td><strong>Spring II 2026<br>(Jun–Aug)</strong></td>
+                                <td>
+                                    • Continue collecting survey responses<br>
+                                    • Compile industry advisory feedback<br>
+                                    • No major new initiatives
+                                </td>
+                            </tr>
+                            <tr class="improvement-cell">
+                                <td><strong>Phase 3:<br>Analysis &<br>Focus Groups</strong></td>
+                                <td><strong>Fall I 2026<br>(Sep–Oct)</strong></td>
+                                <td>
+                                    • Analyze all quantitative and qualitative data<br>
+                                    • Conduct faculty and student focus groups<br>
+                                    • Complete curriculum benchmarking<br>
+                                    • Synthesize findings
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phase 4:<br>Report<br>Drafting</strong></td>
+                                <td><strong>Fall I 2026<br>(Oct–Dec)</strong></td>
+                                <td>
+                                    • Develop preliminary recommendations<br>
+                                    • Draft full report<br>
+                                    • Circulate for faculty and stakeholder feedback
+                                </td>
+                            </tr>
+                            <tr class="warning-cell">
+                                <td><strong>Phase 5:<br>Final Revision &<br>Submission</strong></td>
+                                <td><strong>Fall II 2027<br>(Jan)</strong></td>
+                                <td>
+                                    • Incorporate feedback<br>
+                                    • Finalize and submit Periodic Program Review report
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="calculation-box">
+                    <h4>Timeline Overview:</h4>
+                    <p><strong>Duration:</strong> 10 months (March 2026 - January 2027)</p>
+                    <p><strong>Critical Milestones:</strong> Survey completion (Jun 2026) → Focus groups (Oct 2026) → Draft report (Dec 2026) → Final submission (Jan 2027)</p>
+                </div>
+
+                <div class="conclusion-highlight">
+                    ⏱️ Phased approach ensures systematic data collection, thorough analysis, and comprehensive stakeholder engagement
+                </div>
+            </div>
+
+            <!-- Slide 5: Summary -->
+            <div class="slide">
+                <h2>Summary & Next Steps</h2>
+                
+                <div class="conclusion-highlight">
+                    STRONG FOUNDATION, STRATEGIC OPPORTUNITIES: Program demonstrates strong performance with clear pathways for continuous improvement
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Strategic<br>Priorities</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Data Collection<br>Categories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2025-26</div>
+                        <div class="stat-label">Implementation<br>Period</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2026-27</div>
+                        <div class="stat-label">Year 2<br>Full Review</div>
+                    </div>
+                </div>
+
+                <div class="data-table-container">
+                    <h3>Program Strengths & Focus Areas</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Key Strengths</th>
+                                <th>Priority Focus Areas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="improvement-cell">83.2% Enrollment Growth (5-year)</td>
+                                <td class="warning-cell">Address enrollment decline</td>
+                            </tr>
+                            <tr>
+                                <td class="improvement-cell">67.9% Transfer Rate</td>
+                                <td class="warning-cell">Improve retention rates to 70%+</td>
+                            </tr>
+                            <tr>
+                                <td class="improvement-cell">85.7% Graduate Growth</td>
+                                <td class="warning-cell">Enhance curriculum alignment</td>
+                            </tr>
+                            <tr>
+                                <td class="improvement-cell">Strong industry relevance</td>
+                                <td class="warning-cell">Continuous quality improvement</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="objective-box">
+                    <h3>🚀 Immediate Actions (Starting Spring 2025)</h3>
+                    <p>✓ Launch comprehensive student surveys across all populations</p>
+                    <p>✓ Initiate employer consultations with advisory board & industry partners</p>
+                    <p>✓ Begin peer benchmarking with CUNY & regional colleges</p>
+                    <p>✓ Pilot transfer feedback process with receiving institutions</p>
+                    <p>✓ Establish baseline metrics for all three strategic priorities</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+            <button class="nav-btn" onclick="nextSlide()">Next →</button>
+        </div>
+
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">5</span>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function showTab(tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
